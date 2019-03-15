@@ -735,6 +735,8 @@ setMethod("summary", signature(object="MultiChainLadder"),
 	
 	# fitted values
 	fitted.values <- fitted(object)
+	# hack to remove NA's and reproduce matrix structure
+	fitted.values <- lapply(fitted.values, function(x) t(t(x[!is.na(x)])))
 	fitted.values <- as.matrix(cbind(do.call("rbind",fitted.values),dev))
 	dimnames(fitted.values)[[2]] <- c(as.character(1:p),"dev")
 	
