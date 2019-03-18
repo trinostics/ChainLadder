@@ -1270,6 +1270,7 @@ setMethod("fitted",
 			B <- coef(object)
     			for (i in 1:(n-1)){
         			x <- sapply(Triangles, "[", 1:(m-i),i)  
+        			x <- x[!is.na(x)]
       			fitted[[i]] <- x%*%diag(B[[i]],nrow=p)
 			}
 	}
